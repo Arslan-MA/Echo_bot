@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+
+{% block chat %}
+    {% if user.is_authenticated %}
+        <div class="chat">
+            <div class="bot_chat">
+                {% for bot in bots %}
+                    {% if user == bot.user %}
+                    <div class="bot_m">
+                        <h4 style="text-align: left;
+                        margin-bottom: 10px;">Bot:</h4>
+                        <p>{{ bot.message }}</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="user_chat">
+                {% for u_m in users %}
+                    {% if user == u_m.auther %}
+                        <div class="user_m">
+                            <h4 style="text-align: left;
+                            margin-bottom: 10px;">User:</h4>
+                            <p>{{ u_m.message }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for f in form %}
+                {{ f }}
+            {% endfor %}
+            <input class="form_btn" type="submit" value="Send">
+        </form>
+    {% else %}
+        <div class="chat_not"><h2 style="margin: auto;">Only for authorized users</h2></div>
+    {% endif %}
+{% endblock %}

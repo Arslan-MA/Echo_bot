@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% block chat %}
+{% endblock %}
+
+{% block content %}
+        <div class="register">
+            <h1>Login Page</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for f in form %}
+                    <p>{{ f.label }}</p>
+                    <p>{{ f }}</p>
+                {% endfor %}
+                <input class="login_btn" type="submit" value="Log in">
+            </form>
+        </div>
+        <a href="{% url 'start' %}"><button class="login_btn" type="button">Cancel</button></a>
+{% endblock %}
